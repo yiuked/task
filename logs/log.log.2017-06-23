@@ -1,0 +1,54 @@
+2017-06-23 17:11:59  [ main:0 ] - [ INFO ]  System is booting...
+2017-06-23 17:11:59  [ main:13 ] - [ INFO ]  TaskListen starting ...
+2017-06-23 17:11:59  [ main:14 ] - [ INFO ]  TaskListen is started.
+2017-06-23 17:12:09  [ Task listen:10181 ] - [ INFO ]  Client[/127.0.0.1:12555] is connected.
+2017-06-23 17:12:09  [ Task listen:10182 ] - [ INFO ]  Client[/127.0.0.1:12555] request data:{"platformUserNo":"65405","realName":"\u4e60\u975e","idCardType":"PRC_ID","userRole":"INVESTOR","idCardNo":"350825199412186000","mobile":"18111235957","bankcardNo":"6228480402564890017","bankcode":"ABOC","accessType":"FULL_CHECKED","auditStatus":"PASSED","requestNo":"REG-20170612161019","code":"0","status":"SUCCESS"}
+2017-06-23 17:12:09  [ Task listen:10184 ] - [ INFO ]  Client[/127.0.0.1:12555] is close.
+2017-06-23 17:13:06  [ Task listen:66852 ] - [ INFO ]  Client[/127.0.0.1:12577] is connected.
+2017-06-23 17:13:06  [ Task listen:66852 ] - [ INFO ]  Client[/127.0.0.1:12577] request data:{"platformUserNo":"65405","realName":"\u4e60\u975e","idCardType":"PRC_ID","userRole":"INVESTOR","idCardNo":"350825199412186000","mobile":"18111235957","bankcardNo":"6228480402564890017","bankcode":"ABOC","accessType":"FULL_CHECKED","auditStatus":"PASSED","requestNo":"REG-20170612161019","code":"0","status":"SUCCESS"}
+2017-06-23 17:13:06  [ Task listen:66853 ] - [ INFO ]  Client[/127.0.0.1:12577] is close.
+2017-06-23 17:13:11  [ Task listen:71403 ] - [ INFO ]  Client[/127.0.0.1:12580] is connected.
+2017-06-23 17:13:11  [ Task listen:71404 ] - [ INFO ]  Client[/127.0.0.1:12580] request data:{"platformUserNo":"65405","realName":"\u4e60\u975e","idCardType":"PRC_ID","userRole":"INVESTOR","idCardNo":"350825199412186000","mobile":"18111235957","bankcardNo":"6228480402564890017","bankcode":"ABOC","accessType":"FULL_CHECKED","auditStatus":"PASSED","requestNo":"REG-20170612161019","code":"0","status":"SUCCESS"}
+2017-06-23 17:13:11  [ Task listen:71404 ] - [ INFO ]  Client[/127.0.0.1:12580] is close.
+2017-06-23 17:13:12  [ Task listen:72641 ] - [ INFO ]  Client[/127.0.0.1:12581] is connected.
+2017-06-23 17:13:12  [ Task listen:72642 ] - [ INFO ]  Client[/127.0.0.1:12581] request data:{"platformUserNo":"65405","realName":"\u4e60\u975e","idCardType":"PRC_ID","userRole":"INVESTOR","idCardNo":"350825199412186000","mobile":"18111235957","bankcardNo":"6228480402564890017","bankcode":"ABOC","accessType":"FULL_CHECKED","auditStatus":"PASSED","requestNo":"REG-20170612161019","code":"0","status":"SUCCESS"}
+2017-06-23 17:13:12  [ Task listen:72643 ] - [ INFO ]  Client[/127.0.0.1:12581] is close.
+2017-06-23 17:13:13  [ Task listen:73771 ] - [ INFO ]  Client[/127.0.0.1:12582] is connected.
+2017-06-23 17:13:13  [ Task listen:73773 ] - [ INFO ]  Client[/127.0.0.1:12582] request data:{"platformUserNo":"65405","realName":"\u4e60\u975e","idCardType":"PRC_ID","userRole":"INVESTOR","idCardNo":"350825199412186000","mobile":"18111235957","bankcardNo":"6228480402564890017","bankcode":"ABOC","accessType":"FULL_CHECKED","auditStatus":"PASSED","requestNo":"REG-20170612161019","code":"0","status":"SUCCESS"}
+2017-06-23 17:13:13  [ Task listen:73774 ] - [ INFO ]  Client[/127.0.0.1:12582] is close.
+2017-06-23 17:13:14  [ Task listen:74979 ] - [ INFO ]  Client[/127.0.0.1:12584] is connected.
+2017-06-23 17:13:14  [ Task listen:74979 ] - [ INFO ]  Client[/127.0.0.1:12584] request data:{"platformUserNo":"65405","realName":"\u4e60\u975e","idCardType":"PRC_ID","userRole":"INVESTOR","idCardNo":"350825199412186000","mobile":"18111235957","bankcardNo":"6228480402564890017","bankcode":"ABOC","accessType":"FULL_CHECKED","auditStatus":"PASSED","requestNo":"REG-20170612161019","code":"0","status":"SUCCESS"}
+2017-06-23 17:13:14  [ Task listen:74980 ] - [ INFO ]  Client[/127.0.0.1:12584] is close.
+2017-06-23 17:13:15  [ Task listen:76199 ] - [ INFO ]  Client[/127.0.0.1:12585] is connected.
+2017-06-23 17:13:15  [ Task listen:76199 ] - [ INFO ]  Client[/127.0.0.1:12585] request data:{"platformUserNo":"65405","realName":"\u4e60\u975e","idCardType":"PRC_ID","userRole":"INVESTOR","idCardNo":"350825199412186000","mobile":"18111235957","bankcardNo":"6228480402564890017","bankcode":"ABOC","accessType":"FULL_CHECKED","auditStatus":"PASSED","requestNo":"REG-20170612161019","code":"0","status":"SUCCESS"}
+2017-06-23 17:13:15  [ Task listen:76200 ] - [ INFO ]  Client[/127.0.0.1:12585] is close.
+2017-06-23 17:13:17  [ Task listen:77610 ] - [ INFO ]  Client[/127.0.0.1:12586] is connected.
+2017-06-23 17:13:17  [ Task listen:77610 ] - [ INFO ]  Client[/127.0.0.1:12586] request data:{"platformUserNo":"65405","realName":"\u4e60\u975e","idCardType":"PRC_ID","userRole":"INVESTOR","idCardNo":"350825199412186000","mobile":"18111235957","bankcardNo":"6228480402564890017","bankcode":"ABOC","accessType":"FULL_CHECKED","auditStatus":"PASSED","requestNo":"REG-20170612161019","code":"0","status":"SUCCESS"}
+2017-06-23 17:13:17  [ Task listen:77611 ] - [ INFO ]  Client[/127.0.0.1:12586] is close.
+2017-06-23 17:16:03  [ main:0 ] - [ INFO ]  System is booting...
+2017-06-23 17:16:03  [ main:7 ] - [ INFO ]  TaskListen starting ...
+2017-06-23 17:16:03  [ main:8 ] - [ INFO ]  TaskListen is started.
+2017-06-23 17:16:08  [ Task listen:5213 ] - [ INFO ]  Client[/127.0.0.1:12624] is connected.
+2017-06-23 17:16:08  [ Task listen:5214 ] - [ INFO ]  Client[/127.0.0.1:12624] request data:{"platformUserNo":"65405","realName":"\u4e60\u975e","idCardType":"PRC_ID","userRole":"INVESTOR","idCardNo":"350825199412186000","mobile":"18111235957","bankcardNo":"6228480402564890017","bankcode":"ABOC","accessType":"FULL_CHECKED","auditStatus":"PASSED","requestNo":"REG-20170612161019","code":"0","status":"SUCCESS"}
+2017-06-23 17:16:08  [ Task listen:5214 ] - [ INFO ]  Client[/127.0.0.1:12624] is close.
+2017-06-23 17:25:02  [ Task listen:538739 ] - [ INFO ]  Client[/127.0.0.1:12783] is connected.
+2017-06-23 17:25:02  [ Task listen:538739 ] - [ INFO ]  Client[/127.0.0.1:12783] request data:Test
+2017-06-23 17:25:02  [ Task listen:538740 ] - [ INFO ]  Client[/127.0.0.1:12783] is close.
+2017-06-23 17:25:33  [ Task listen:569885 ] - [ INFO ]  Client[/127.0.0.1:12789] is connected.
+2017-06-23 17:25:33  [ Task listen:569885 ] - [ INFO ]  Client[/127.0.0.1:12789] request data:Test
+2017-06-23 17:25:33  [ Task listen:569885 ] - [ INFO ]  Client[/127.0.0.1:12789] is close.
+2017-06-23 17:27:48  [ Task listen:704496 ] - [ INFO ]  Client[/127.0.0.1:12827] is connected.
+2017-06-23 17:27:48  [ Task listen:704497 ] - [ INFO ]  Client[/127.0.0.1:12827] request data:Test\r\n{"platformUserNo":"65405","realName":"\u4e60\u975e","idCardType":"PRC_ID","userRole":"INVESTOR","idCardNo":"350825199412186000","mobile":"18111235957","bankcardNo":"6228480402564890017","bankcode":"ABOC","accessType":"FULL_CHECKED","auditStatus":"PASSED","requestNo":"REG-20170612161019","code":"0","status":"SUCCESS"}
+2017-06-23 17:27:48  [ Task listen:704497 ] - [ INFO ]  Client[/127.0.0.1:12827] is close.
+2017-06-23 17:30:52  [ main:0 ] - [ INFO ]  System is booting...
+2017-06-23 17:30:52  [ main:8 ] - [ INFO ]  TaskListen starting ...
+2017-06-23 17:30:52  [ main:8 ] - [ INFO ]  TaskListen is started.
+2017-06-23 17:30:59  [ Task listen:6106 ] - [ INFO ]  Client[/127.0.0.1:12873] is connected.
+2017-06-23 17:30:59  [ Task listen:6107 ] - [ INFO ]  Client[/127.0.0.1:12873] request data:Test\r\n{"platformUserNo":"65405","realName":"\u4e60\u975e","idCardType":"PRC_ID","userRole":"INVESTOR","idCardNo":"350825199412186000","mobile":"18111235957","bankcardNo":"6228480402564890017","bankcode":"ABOC","accessType":"FULL_CHECKED","auditStatus":"PASSED","requestNo":"REG-20170612161019","code":"0","status":"SUCCESS"}
+2017-06-23 17:30:59  [ Task listen:6108 ] - [ INFO ]  Client[/127.0.0.1:12873] is close.
+2017-06-23 17:31:05  [ Task listen:12085 ] - [ INFO ]  Client[/127.0.0.1:12875] is connected.
+2017-06-23 17:31:05  [ Task listen:12086 ] - [ INFO ]  Client[/127.0.0.1:12875] request data:Test\r\n{"platformUserNo":"65405","realName":"\u4e60\u975e","idCardType":"PRC_ID","userRole":"INVESTOR","idCardNo":"350825199412186000","mobile":"18111235957","bankcardNo":"6228480402564890017","bankcode":"ABOC","accessType":"FULL_CHECKED","auditStatus":"PASSED","requestNo":"REG-20170612161019","code":"0","status":"SUCCESS"}
+2017-06-23 17:31:05  [ Task listen:12086 ] - [ INFO ]  Client[/127.0.0.1:12875] is close.
+2017-06-23 17:31:08  [ Task listen:15953 ] - [ INFO ]  Client[/127.0.0.1:12877] is connected.
+2017-06-23 17:31:08  [ Task listen:15954 ] - [ INFO ]  Client[/127.0.0.1:12877] request data:Test\r\n{"platformUserNo":"65405","realName":"\u4e60\u975e","idCardType":"PRC_ID","userRole":"INVESTOR","idCardNo":"350825199412186000","mobile":"18111235957","bankcardNo":"6228480402564890017","bankcode":"ABOC","accessType":"FULL_CHECKED","auditStatus":"PASSED","requestNo":"REG-20170612161019","code":"0","status":"SUCCESS"}
+2017-06-23 17:31:08  [ Task listen:15955 ] - [ INFO ]  Client[/127.0.0.1:12877] is close.

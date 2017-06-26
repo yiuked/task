@@ -1,0 +1,2 @@
+2017-06-24 13:26:06  [ main:0 ] - [ ERROR ]  数据库连接失败!
+2017-06-24 13:38:11  [ main:16 ] - [ ERROR ]  数据库连接失败!"jdbc:mysql://localhost:3306/zsjr" "root" "root"
