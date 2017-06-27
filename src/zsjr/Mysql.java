@@ -1,12 +1,7 @@
 package zsjr;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.Statement;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -14,95 +9,125 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 import org.apache.log4j.Logger;
 
-import com.mysql.jdbc.Driver;
-
-
-
 public class Mysql {
-	private static Logger logger = Logger.getLogger(Main.class); 
-	
+	private static Logger logger = Logger.getLogger(Main.class);
+
 	public static Connection connection = null;
-	public static Statement statement = null;
 	public static Properties config;
-	
+
 	public Mysql() {
-        String configFile = "/zsjr/config/mysql.properties";
-        config = new Properties();
-        try {
-        	config.load(Mysql.class.getResourceAsStream(configFile));  
+		String configFile = "/zsjr/config/mysql.properties";
+		config = new Properties();
+		try {
+			config.load(Mysql.class.getResourceAsStream(configFile));
 		} catch (IOException e) {
-			logger.error(String.format("¼ÓÔØÊı¾İ¿âÅäÖÃÎÄ¼ş(%s)Ê§°Ü£¬Î´ÕÒµ½ÎÄ¼ş!", config));
+			logger.error(String.format("åŠ è½½æ•°æ®åº“é…ç½®æ–‡ä»¶(%s)å¤±è´¥ï¼Œæœªæ‰¾åˆ°æ–‡ä»¶!", config));
 		}
 	}
 
 	public void connect() {
 		if (connection == null) {
-			logger.info("ÕıÔÚÁ¬½ÓÊı¾İ¿â...");
-	        try {
-	        	Class.forName("com.mysql.cj.jdbc.Driver");
-	        } catch (ClassNotFoundException e) {
-	            logger.error("¼ÓÔØcom.mysql.jdbc.DriverÊ§°Ü!");
-	        }
+			logger.info("æ­£åœ¨è¿æ¥æ•°æ®åº“...");
+			try {
+				Class.forName("com.mysql.cj.jdbc.Driver");
+			} catch (ClassNotFoundException e) {
+				logger.error("åŠ è½½com.mysql.jdbc.Driverå¤±è´¥!");
+			}
 
-	    	String url = config.getProperty("mysql.link").trim();
-	        String user = config.getProperty("mysql.user").trim();
-	    	String passwd = config.getProperty("mysql.passwd").trim();
-	    	
-	        try {
-	        	connection = DriverManager.getConnection(url, user, passwd);
-	        	statement = connection.createStatement();
-	        } catch(SQLException e) {
-	        	e.printStackTrace();
-	        	logger.error("Êı¾İ¿âÁ¬½ÓÊ§°Ü!" + String.format("%s %s %s", url, user, passwd));
-	        }
+			String url = config.getProperty("mysql.link").trim();
+			String user = config.getProperty("mysql.user").trim();
+			String passwd = config.getProperty("mysql.passwd").trim();
+
+			try {
+				connection = DriverManager.getConnection(url, user, passwd);
+			} catch(SQLException e) {
+				e.printStackTrace();
+				logger.error("æ•°æ®åº“è¿æ¥å¤±è´¥!" + String.format("%s %s %s", url, user, passwd));
+			}
 		}
 	}
 
-	public List<Map<String, Object>> queryAll(String sql) {  
+	public List<Map<String, Object>> queryAll(String sql) {
 		List<Map<String, Object>> list = new ArrayList<Map<String,Object>>();
-	    try {  
-	        ResultSet rs = statement.executeQuery(PSql(sql));
-	        ResultSetMetaData md = rs.getMetaData(); //»ñµÃ½á¹û¼¯½á¹¹ĞÅÏ¢,ÔªÊı¾İ  
-	        int columnCount = md.getColumnCount();   //»ñµÃÁĞÊı   
-	        while (rs.next()) {  
-	            Map<String,Object> rowData = new HashMap<String,Object>();
-	            for (int i = 1; i <= columnCount; i++) {  
-	                rowData.put(md.getColumnName(i), rs.getObject(i));  
-	            }  
-	            list.add(rowData);  
-	        }
-	    } catch (SQLException e) {  
-	        e.printStackTrace();  
-	    }
-		return list;  
-	}
-	
-	public boolean execut(String sql) {
 		try {
-			return statement.execute(PSql(sql));
+			PreparedStatement preStat = connection.prepareStatement(PSql(sql));
+			ResultSet rs = preStat.executeQuery();
+			ResultSetMetaData md = rs.getMetaData(); //è·å¾—ç»“æœé›†ç»“æ„ä¿¡æ¯,å…ƒæ•°æ®
+			int columnCount = md.getColumnCount();   //è·å¾—åˆ—æ•°
+			while (rs.next()) {
+				Map<String,Object> rowData = new HashMap<String,Object>();
+				for (int i = 1; i <= columnCount; i++) {
+					rowData.put(md.getColumnName(i), rs.getObject(i));
+				}
+				list.add(rowData);
+			}
+			rs.close();
+			preStat.close();
 		} catch (SQLException e) {
-			e.printStackTrace();  
+			e.printStackTrace();
 		}
-		return false;
+		return list;
 	}
-	
-	public String PSql(String sql) {
-	
-	    //Éú³ÉÆ¥ÅäÄ£Ê½µÄÕıÔò±í´ïÊ½
-	    String patternString = "\\{([a-zA-Z0-9_-]+)\\}";
 
-	    Pattern pattern = Pattern.compile(patternString);
-	    Matcher matcher = pattern.matcher(sql);
-	   
-	    //Á½¸ö·½·¨£ºappendReplacement, appendTail
-	    StringBuffer sb = new StringBuffer();
-	    while(matcher.find()) {
-	        matcher.appendReplacement(sb, config.getProperty("mysql.prefix") + matcher.group(1));
-	    }
-	    matcher.appendTail(sb);
-	    return sb.toString();
+	public Map<String, Object> queryOne(String sql) {
+		Map<String, Object> map = new HashMap<String,Object>();
+		try {
+			PreparedStatement preStat = connection.prepareStatement(PSql(sql));
+			ResultSet rs = preStat.executeQuery();
+			ResultSetMetaData md = rs.getMetaData(); //è·å¾—ç»“æœé›†ç»“æ„ä¿¡æ¯,å…ƒæ•°æ®
+			int columnCount = md.getColumnCount();   //è·å¾—åˆ—æ•°
+			rs.next();
+			for (int i = 1; i <= columnCount; i++) {
+				map.put(md.getColumnName(i), rs.getObject(i));
+			}
+			rs.close();
+			preStat.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return map;
+	}
+
+	public int execut(String sql) {
+		try {
+			PreparedStatement preStat = connection.prepareStatement(PSql(sql));
+			return preStat.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return -1;
+	}
+
+	public int insert(String sql) {
+		int primaryKey = -1;
+		try {
+			PreparedStatement preStat = connection.prepareStatement(PSql(sql), Statement.RETURN_GENERATED_KEYS);
+			ResultSet rs = preStat.getGeneratedKeys();
+			if (rs.next()) {
+				primaryKey = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return primaryKey;
+	}
+
+	public String PSql(String sql) {
+
+		//ç”ŸæˆåŒ¹é…æ¨¡å¼çš„æ­£åˆ™è¡¨è¾¾å¼
+		String patternString = "\\{([a-zA-Z0-9_-]+)\\}";
+
+		Pattern pattern = Pattern.compile(patternString);
+		Matcher matcher = pattern.matcher(sql);
+
+		//ä¸¤ä¸ªæ–¹æ³•ï¼šappendReplacement, appendTail
+		StringBuffer sb = new StringBuffer();
+		while(matcher.find()) {
+			matcher.appendReplacement(sb, config.getProperty("mysql.prefix") + matcher.group(1));
+		}
+		matcher.appendTail(sb);
+		return sb.toString();
 	}
 }
