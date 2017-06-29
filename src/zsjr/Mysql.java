@@ -13,9 +13,9 @@ import org.apache.log4j.Logger;
 
 public class Mysql {
 	private static Logger logger = Logger.getLogger(Main.class);
-
-	public static Connection connection = null;
+	private static Mysql _instance = null;
 	public static Properties config;
+	public Connection connection = null;
 
 	public Mysql() {
 		String configFile = "/zsjr/config/mysql.properties";
@@ -25,6 +25,14 @@ public class Mysql {
 		} catch (IOException e) {
 			logger.error(String.format("加载数据库配置文件(%s)失败，未找到文件!", config));
 		}
+	}
+	
+	public static Mysql instance() {
+		if (_instance == null) {
+			_instance = new Mysql();
+			_instance.connect();
+		}
+		return _instance;
 	}
 
 	public void connect() {
@@ -78,9 +86,10 @@ public class Mysql {
 			ResultSet rs = preStat.executeQuery();
 			ResultSetMetaData md = rs.getMetaData(); //获得结果集结构信息,元数据
 			int columnCount = md.getColumnCount();   //获得列数
-			rs.next();
-			for (int i = 1; i <= columnCount; i++) {
-				map.put(md.getColumnName(i), rs.getObject(i));
+			if (rs.next()) {
+				for (int i = 1; i <= columnCount; i++) {
+					map.put(md.getColumnName(i), rs.getObject(i));
+				}
 			}
 			rs.close();
 			preStat.close();
@@ -104,6 +113,7 @@ public class Mysql {
 		int primaryKey = -1;
 		try {
 			PreparedStatement preStat = connection.prepareStatement(PSql(sql), Statement.RETURN_GENERATED_KEYS);
+			preStat.executeUpdate();
 			ResultSet rs = preStat.getGeneratedKeys();
 			if (rs.next()) {
 				primaryKey = rs.getInt(1);

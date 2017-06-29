@@ -10,19 +10,15 @@ public class Main {
 	private static Logger logger = Logger.getLogger(Main.class); 
 
 	public static void main(String[] args) {
-		Mysql mysql = new Mysql();
-		mysql.connect();
-		mysql.execut("update {users} set password=md5('as616766')");
-		//List<Map<String, Object>> list = mysql.queryAll("SELECT * FROM {users}");
-		//System.out.println(list);
-//		try{
-//			logger.info("System is booting...");
-//			TaskListen taskListen = new TaskListen(10501);
-//			taskListen.start();
-//			logger.info("TaskListen is started.");
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
-		
+		try{
+			logger.info("System is booting...");
+			TaskProcess taskProcess = new TaskProcess();
+			TaskListen taskListen = new TaskListen(10501);
+			taskProcess.start();
+			taskListen.start();
+			logger.info("TaskListen is started.");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }

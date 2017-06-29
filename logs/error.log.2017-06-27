@@ -1,0 +1,3 @@
+2017-06-27 18:30:13  [ main:328 ] - [ ERROR ]  数据库连接失败!jdbc:mysql://localhost:3306/zsjr?serverTimezone=UTC zsjr zsjr
+2017-06-27 18:30:41  [ main:181 ] - [ ERROR ]  数据库连接失败!jdbc:mysql://localhost:3306/zsjr?serverTimezone=UTC zsjr zsjr
+2017-06-27 18:31:00  [ main:181 ] - [ ERROR ]  数据库连接失败!jdbc:mysql://localhost:3306/zsjr?serverTimezone=UTC root root

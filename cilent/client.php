@@ -19,9 +19,7 @@ if($result === false) {
 	echo "OK \n";
 }
 
-$in  = "Test";
-$in .= "\\r\\n";
-$in .= '{"platformUserNo":"65405","realName":"\u4e60\u975e","idCardType":"PRC_ID","userRole":"INVESTOR","idCardNo":"350825199412186000","mobile":"18111235957","bankcardNo":"6228480402564890017","bankcode":"ABOC","accessType":"FULL_CHECKED","auditStatus":"PASSED","requestNo":"REG-20170612161019","code":"0","status":"SUCCESS"}';
+$in .= '{"service":"bind_card"}';
 $in .= "\r\n";
 
 $out = "";
