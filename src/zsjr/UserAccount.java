@@ -3,9 +3,9 @@ package zsjr;
 import java.util.Map;
 
 public class UserAccount {
-	public boolean addLog(Map<String, Object> data) throws NidExistsException {
+	public static boolean addLog(Map<String, Object> data) throws NidExistsException {
 		Map<String, Object> log = Mysql.instance().queryOne(
-				String.format("SELECT COUNT(*) FROM `{account_log}` WHERE `nid`='%s'", data.get("nid"))
+				String.format("SELECT id FROM `{account_log}` WHERE `nid`='%s'", data.get("nid"))
 				);
         if (log.isEmpty() == false) {
         	throw new NidExistsException(String.format("account_log÷–“—¥Ê‘⁄nid%s", data.get("nid")));
@@ -37,43 +37,44 @@ public class UserAccount {
         sql.append(String.format("`code_nid`='%s',", data.get("code_nid")));
         sql.append(String.format("`user_id`=%d,", data.get("user_id")));
         sql.append(String.format("`type`='%s',", data.get("type")));
-        sql.append(String.format("`money`=%f,", data.get("money")));
+        sql.append("`account_type`='null',");
+        sql.append(String.format("`money`=%.2f,", data.get("money")));
         sql.append(String.format("`remark`='%s',", data.get("remark")));
         sql.append(String.format("`to_userid`=%d,", data.get("to_userid")));
         
-        sql.append(String.format("`balance_cash_new`=%f,", data.get("balance_cash_new")));
-        sql.append(String.format("`balance_cash_old`=%f,", account.get("balance_cash_old")));
-        sql.append("`balance_cash=balance_cash_new+balance_cash_old,");
+        sql.append(String.format("`balance_cash_new`=%.2f,", data.get("balance_cash")));
+        sql.append(String.format("`balance_cash_old`=%.2f,", account.get("balance_cash")));
+        sql.append("`balance_cash`=balance_cash_new+balance_cash_old,");
         
-        sql.append(String.format("`balance_frost_new`=%f,", data.get("balance_frost_new")));
-        sql.append(String.format("`balance_frost_old`=%f,", account.get("balance_frost_old")));
-        sql.append("balance_frost=balance_frost_new+balance_frost_old,");
+        sql.append(String.format("`balance_frost_new`=%.2f,", data.get("balance_frost")));
+        sql.append(String.format("`balance_frost_old`=%.2f,", account.get("balance_frost")));
+        sql.append("`balance_frost`=balance_frost_new+balance_frost_old,");
         
-        sql.append(String.format("`balance_new`=%f,", data.get("balance_new")));
-        sql.append(String.format("`balance_old`=%f,", account.get("balance_old")));
+        sql.append("`balance_new`=balance_cash_new+balance_frost_new,");
+        sql.append(String.format("`balance_old`=%.2f,", account.get("balance")));
         sql.append("balance=balance_new+balance_old,");
         
-        sql.append(String.format("`income_new`=%f,", data.get("income_new")));
-        sql.append(String.format("`income_old`=%f,", account.get("income_old")));
+        sql.append(String.format("`income_new`=%.2f,", data.get("income")));
+        sql.append(String.format("`income_old`=%.2f,", account.get("income")));
         sql.append("income=income_new+income_old,");
         
-        sql.append(String.format("`expend_new`=%f,", data.get("expend_new")));
-        sql.append(String.format("`expend_old`=%f,", account.get("expend_old")));
+        sql.append(String.format("`expend_new`=%.2f,", data.get("expend")));
+        sql.append(String.format("`expend_old`=%.2f,", account.get("expend")));
         sql.append("expend=expend_new+expend_old,");
         
-        sql.append(String.format("`frost_new`=%f,", data.get("frost_new")));
-        sql.append(String.format("`frost_old`=%f,", account.get("frost_old")));
+        sql.append(String.format("`frost_new`=%.2f,", data.get("frost")));
+        sql.append(String.format("`frost_old`=%.2f,", account.get("frost")));
         sql.append("frost=frost_new+frost_old,");
         
-        sql.append(String.format("`await_new`=%f,", data.get("await_new")));
-        sql.append(String.format("`await_old`=%f,", account.get("await_old")));
+        sql.append(String.format("`await_new`=%.2f,", data.get("await")));
+        sql.append(String.format("`await_old`=%.2f,", account.get("await")));
         sql.append("await=await_new+await_old,");
         
-        sql.append(String.format("`repay_new`=%f,", data.get("repay_new")));
-        sql.append(String.format("`repay_old`=%f,", account.get("repay_old")));
+        sql.append(String.format("`repay_new`=%.2f,", data.get("repay")));
+        sql.append(String.format("`repay_old`=%.2f,", account.get("repay")));
         sql.append("repay=repay_new+repay_old,");
         
-        sql.append(String.format("`total_old`=%f,", account.get("total_old")));
+        sql.append(String.format("`total_old`=%.2f,", account.get("total")));
         sql.append("`total`=balance+frost+await,");
         
         sql.append(String.format("`addtime`=%d,", System.currentTimeMillis()/1000));
@@ -86,14 +87,14 @@ public class UserAccount {
 
 		StringBuffer updSql = new StringBuffer();
 		updSql.append("UPDATE `{account}` SET ");
-		updSql.append(String.format("`income`=%f,", lastLog.get("income")));
-		updSql.append(String.format("`expend`=%f,", lastLog.get("expend")));
-		updSql.append(String.format("`balance_cash`=%f,", lastLog.get("balance_cash")));
-		updSql.append(String.format("`balance_frost`=%f,", lastLog.get("balance_frost")));
-		updSql.append(String.format("`await`=%f,", lastLog.get("await")));
-		updSql.append(String.format("`balance`=%f,", lastLog.get("balance")));
-		updSql.append(String.format("`repay`=%f,", lastLog.get("repay")));
-		updSql.append(String.format("`total`=%f,", lastLog.get("total")));
+		updSql.append(String.format("`income`=%.2f,", lastLog.get("income")));
+		updSql.append(String.format("`expend`=%.2f,", lastLog.get("expend")));
+		updSql.append(String.format("`balance_cash`=%.2f,", lastLog.get("balance_cash")));
+		updSql.append(String.format("`balance_frost`=%.2f,", lastLog.get("balance_frost")));
+		updSql.append(String.format("`await`=%.2f,", lastLog.get("await")));
+		updSql.append(String.format("`balance`=%.2f,", lastLog.get("balance")));
+		updSql.append(String.format("`repay`=%.2f,", lastLog.get("repay")));
+		updSql.append(String.format("`total`=%.2f", lastLog.get("total")));
 		updSql.append(String.format(" where user_id=%d", data.get("user_id")));
 		Mysql.instance().execut(updSql.toString());
 		Mysql.instance().execut("COMMIT");
@@ -115,12 +116,12 @@ public class UserAccount {
 			float acbBalance = (float)lastBalance.get("balance") - (float)data.get("income") + (float)data.get("expend");
 			StringBuffer acbSql = new StringBuffer();
 			acbSql.append("INSERT INTO `{account_balance}` SET ");
-			acbSql.append(String.format("`total`=%f,", acbTotal));
-			acbSql.append(String.format("`balance`=%f,", acbBalance));
-			acbSql.append(String.format("`income`=%f,", data.get("income")));
-			acbSql.append(String.format("`expend`=%f,", data.get("expend")));
+			acbSql.append(String.format("`total`=%.2f,", acbTotal));
+			acbSql.append(String.format("`balance`=%.2f,", acbBalance));
+			acbSql.append(String.format("`income`=%.2f,", data.get("income")));
+			acbSql.append(String.format("`expend`=%.2f,", data.get("expend")));
 			acbSql.append(String.format("`type`='%s',", data.get("type")));
-			acbSql.append(String.format("`money`=%f,", data.get("money")));
+			acbSql.append(String.format("`money`=%.2f,", data.get("money")));
 			acbSql.append(String.format("`user_id`=%d,", data.get("user_id")));
 			acbSql.append(String.format("`nid`='%s',", data.get("nid")));
 			acbSql.append(String.format("`remark`='%s',", data.get("remark")));
@@ -142,12 +143,12 @@ public class UserAccount {
 			float acwBalance = (float)accWeb.get("balance") - (float)data.get("income") + (float)data.get("expend");
 			StringBuffer acwSql = new StringBuffer();
 			acwSql.append("INSERT INTO `{account_web}` SET ");
-			acwSql.append(String.format("`total`=%f,", acwTotal));
-			acwSql.append(String.format("`balance`=%f,", acwBalance));
-			acwSql.append(String.format("`income`=%f,", data.get("income")));
-			acwSql.append(String.format("`expend`=%f,", data.get("expend")));
+			acwSql.append(String.format("`total`=%.2f,", acwTotal));
+			acwSql.append(String.format("`balance`=%.2f,", acwBalance));
+			acwSql.append(String.format("`income`=%.2f,", data.get("income")));
+			acwSql.append(String.format("`expend`=%.2f,", data.get("expend")));
 			acwSql.append(String.format("`type`='%s',", data.get("type")));
-			acwSql.append(String.format("`money`=%f,", data.get("money")));
+			acwSql.append(String.format("`money`=%.2f,", data.get("money")));
 			acwSql.append(String.format("`user_id`=%d,", data.get("user_id")));
 			acwSql.append(String.format("`nid`='%s',", data.get("nid")));
 			acwSql.append(String.format("`remark`='%s',", data.get("remark")));
@@ -168,12 +169,12 @@ public class UserAccount {
 			float acuBalance = (float)acuWeb.get("balance") - (float)data.get("income") + (float)data.get("expend");
 			StringBuffer acuSql = new StringBuffer();
 			acuSql.append("INSERT INTO `{account_users}` SET ");
-			acuSql.append(String.format("`total`=%f,", acuTotal));
-			acuSql.append(String.format("`balance`=%f,", acuBalance));
-			acuSql.append(String.format("`income`=%f,", data.get("income")));
-			acuSql.append(String.format("`expend`=%f,", data.get("expend")));
+			acuSql.append(String.format("`total`=%.2f,", acuTotal));
+			acuSql.append(String.format("`balance`=%.2f,", acuBalance));
+			acuSql.append(String.format("`income`=%.2f,", data.get("income")));
+			acuSql.append(String.format("`expend`=%.2f,", data.get("expend")));
 			acuSql.append(String.format("`type`='%s',", data.get("type")));
-			acuSql.append(String.format("`money`=%f,", data.get("money")));
+			acuSql.append(String.format("`money`=%.2f,", data.get("money")));
 			acuSql.append(String.format("`user_id`=%d,", data.get("user_id")));
 			acuSql.append(String.format("`nid`='%s',", data.get("nid")));
 			acuSql.append(String.format("`remark`='%s',", data.get("remark")));

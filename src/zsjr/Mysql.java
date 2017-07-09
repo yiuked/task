@@ -138,6 +138,7 @@ public class Mysql {
 			matcher.appendReplacement(sb, config.getProperty("mysql.prefix") + matcher.group(1));
 		}
 		matcher.appendTail(sb);
+		logger.info(sb.toString());
 		return sb.toString();
 	}
 }
