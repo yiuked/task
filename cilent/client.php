@@ -19,19 +19,27 @@ if($result === false) {
 	echo "OK \n";
 }
 
-$in = '{last_ip=127.0.0.1, logintime=3, block_status=0, paypassword=null, tuijian_userid=1, terminal=0, type=1, up_ip=171.214.213.210, realname=, spreads_key=045082, password=7e100345eb9c6a1c192a90001016cce2, province=40, user_id=2, phone=13688045082, last_time=1457846897, reg_time=1457747459, up_time=1457844047, reg_ip=127.0.0.1, yibao=1, email=, username=zsjr_';
-//$in .= "\r\n";
+$in = "1.{last_ip=127.0.0.1, logintime=3, block_status=0, paypassword=null, tuijian_userid=1, terminal=0, type=1, up_ip=171.214.213.210, realname=, spreads_key=045082, password=7e100345eb9c6a1c192a90001016cce2, province=40, user_id=2, phone=13688045082, last_time=1457846897, reg_time=1457747459, up_time=1457844047, reg_ip=127.0.0.1, yibao=1, email=, username=zsjr_20145} \r\n";
+$in .= "2.{last_ip=127.0.0.1, logintime=3, block_status=0, paypassword=null, tuijian_userid=1, terminal=0, type=1, up_ip=171.214.213.210, realname=, spreads_key=045082, password=7e100345eb9c6a1c192a90001016cce2, province=40, user_id=2, phone=13688045082, last_time=1457846897, reg_time=1457747459, up_time=1457844047, reg_ip=127.0.0.1, yibao=1, email=, username=zsjr_20145} \r\n";
+$in .= "3.{last_ip=127.0.0.1, logintime=3, block_status=0, paypassword=null, tuijian_userid=1, terminal=0, type=1, up_ip=171.214.213.210, realname=, spreads_key=045082, password=7e100345eb9c6a1c192a90001016cce2, province=40, user_id=2, phone=13688045082, last_time=1457846897, reg_time=1457747459, up_time=1457844047, reg_ip=127.0.0.1, yibao=1, email=, username=zsjr_20145} \r\n";
+$in .= "4.{last_ip=127.0.0.1, logintime=3, block_status=0, paypassword=null, tuijian_userid=1, terminal=0, type=1, up_ip=171.214.213.210, realname=, spreads_key=045082, password=7e100345eb9c6a1c192a90001016cce2, province=40, user_id=2, phone=13688045082, last_time=1457846897, reg_time=1457747459, up_time=1457844047, reg_ip=127.0.0.1, yibao=1, email=, username=zsjr_20145} \r\n";
+$in .= "5.{last_ip=127.0.0.1, logintime=3, block_status=0, paypassword=null, tuijian_userid=1, terminal=0, type=1, up_ip=171.214.213.210, realname=, spreads_key=045082, password=7e100345eb9c6a1c192a90001016cce2, province=40, user_id=2, phone=13688045082, last_time=1457846897, reg_time=1457747459, up_time=1457844047, reg_ip=127.0.0.1, yibao=1, email=, username=zsjr_20145} \r\n";
 
-$out = "";
+
+
 echo "sending http head request ...";
+echo  "\n";
+echo strlen($in);
+echo  "\n";
 socket_write($socket, $in, strlen($in));
 echo  "OK\n";
 
 echo "Reading response:\n\n";
 while ($out = socket_read($socket, 8192)) {
-	$out .= $out;
+	echo $out;
+	echo "\n";
 }
-var_dump($out);
+echo "\n\n";
 echo "closeing socket..";
 socket_close($socket);
 echo "ok .\n\n";

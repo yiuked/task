@@ -1,18 +1,19 @@
 package zsjr;
 
-import java.io.IOException;
-import java.util.List;
-import java.util.Map;
 import com.zsjr.netty.ProcessServerHandler;
-
 import org.apache.log4j.Logger;
-
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
+import io.netty.channel.ChannelOption;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
+import io.netty.handler.codec.DelimiterBasedFrameDecoder;
+import io.netty.handler.codec.Delimiters;
+import io.netty.handler.codec.FixedLengthFrameDecoder;
+import io.netty.handler.codec.LineBasedFrameDecoder;
+import io.netty.handler.codec.string.StringDecoder;
 
 public class Main {
 	private static Logger logger = Logger.getLogger(Main.class); 
@@ -33,6 +34,10 @@ public class Main {
 		try {
 			ServerBootstrap serverBootstrap = new ServerBootstrap();
 			serverBootstrap.group(master, slave) 				   // master用于监听请求，slave用于处理请求
+					       .option(ChannelOption.SO_REUSEADDR, true)
+					       .option(ChannelOption.SO_BACKLOG, 10000)
+					       .option(ChannelOption.SO_RCVBUF, 2048)
+					       .option(ChannelOption.CONNECT_TIMEOUT_MILLIS, 5000)
 						   .channel(NioServerSocketChannel.class)  // 这个Nio服务端，如果是客户端则使用NioSocketChannel
 						   .localAddress(30023)					   // 绑定端口号
 						   .childHandler(new ChannelInitializer<Channel>() {
@@ -40,6 +45,8 @@ public class Main {
 							@Override
 							protected void initChannel(Channel channel) throws Exception {
 								// TODO Auto-generated method stub
+								channel.pipeline().addLast(new LineBasedFrameDecoder(1024*5));
+								channel.pipeline().addLast(new StringDecoder());
 								channel.pipeline().addLast(new ProcessServerHandler());
 							}
 							   
