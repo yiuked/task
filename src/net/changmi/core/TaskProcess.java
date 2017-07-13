@@ -1,6 +1,7 @@
-package zsjr;
+package net.changmi.core;
 
 import java.util.Map;
+
 import org.apache.log4j.Logger;
 
 public class TaskProcess extends Thread{

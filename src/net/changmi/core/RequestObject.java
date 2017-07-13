@@ -1,4 +1,4 @@
-package zsjr;
+package net.changmi.core;
 
 public class RequestObject {
     private String     service;

@@ -1,4 +1,4 @@
-package zsjr;
+package net.changmi.core;
 
 import java.util.Map;
 

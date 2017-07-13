@@ -1,4 +1,4 @@
-package zsjr;
+package net.changmi.core;
 
 public class NidExistsException extends Exception{
 

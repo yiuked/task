@@ -1,4 +1,4 @@
 eclipse.preferences.version=1
-encoding//src/com/zsjr/netty/ProcessServerHandler.java=UTF-8
-encoding//src/zsjr/Mysql.java=UTF-8
-encoding//src/zsjr/config/mysql.properties=UTF-8
+encoding//src/changmi/config/mysql.properties=UTF-8
+encoding//src/net/changmi/core/Mysql.java=UTF-8
+encoding//src/net/changmi/netty/ProcessServerHandler.java=UTF-8

@@ -1,7 +1,13 @@
-package zsjr;
+package net.changmi.core;
 
 import java.io.IOException;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -9,6 +15,7 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
 import org.apache.log4j.Logger;
 
 public class Mysql {
@@ -23,7 +30,7 @@ public class Mysql {
 		try {
 			config.load(Mysql.class.getResourceAsStream(configFile));
 		} catch (IOException e) {
-			logger.error(String.format("加载数据库配置文件(%s)失败，未找到文件!", config));
+			logger.error(String.format("加载数据库配置文�?(%s)失败，未找到文件!", config));
 		}
 	}
 	
@@ -37,7 +44,7 @@ public class Mysql {
 
 	public void connect() {
 		if (connection == null) {
-			logger.info("正在连接数据库...");
+			logger.info("正在连接数据�?...");
 			try {
 				Class.forName("com.mysql.cj.jdbc.Driver");
 			} catch (ClassNotFoundException e) {
@@ -52,7 +59,7 @@ public class Mysql {
 				connection = DriverManager.getConnection(url, user, passwd);
 			} catch(SQLException e) {
 				e.printStackTrace();
-				logger.error("数据库连接失败!" + String.format("%s %s %s", url, user, passwd));
+				logger.error("数据库连接失�?!" + String.format("%s %s %s", url, user, passwd));
 			}
 		}
 	}
@@ -62,7 +69,7 @@ public class Mysql {
 		try {
 			PreparedStatement preStat = connection.prepareStatement(PSql(sql));
 			ResultSet rs = preStat.executeQuery();
-			ResultSetMetaData md = rs.getMetaData(); //获得结果集结构信息,元数据
+			ResultSetMetaData md = rs.getMetaData(); //获得结果集结构信�?,元数�?
 			int columnCount = md.getColumnCount();   //获得列数
 			while (rs.next()) {
 				Map<String,Object> rowData = new HashMap<String,Object>();
@@ -84,7 +91,7 @@ public class Mysql {
 		try {
 			PreparedStatement preStat = connection.prepareStatement(PSql(sql));
 			ResultSet rs = preStat.executeQuery();
-			ResultSetMetaData md = rs.getMetaData(); //获得结果集结构信息,元数据
+			ResultSetMetaData md = rs.getMetaData(); //获得结果集结构信�?,元数�?
 			int columnCount = md.getColumnCount();   //获得列数
 			if (rs.next()) {
 				for (int i = 1; i <= columnCount; i++) {

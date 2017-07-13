@@ -1,4 +1,4 @@
-package com.zsjr.netty;
+package net.changmi.netty;
 
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelFuture;

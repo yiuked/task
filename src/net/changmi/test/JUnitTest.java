@@ -1,12 +1,12 @@
-package net.changmi.junit.test;
+package net.changmi.test;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import zsjr.NidExistsException;
-import zsjr.UserAccount;
-
 import org.junit.Test;
+
+import net.changmi.core.NidExistsException;
+import net.changmi.core.UserAccount;
 
 public class JUnitTest {
 
