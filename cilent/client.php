@@ -19,8 +19,6 @@ if($result === false) {
 	echo "OK \n";
 }
 
-modify_buff_size(8192, 8192);
-
 $in = "1.{last_ip=127.0.0.1, logintime=3, block_status=0, paypassword=null, tuijian_userid=1, terminal=0, type=1, up_ip=171.214.213.210, realname=, spreads_key=045082, password=7e100345eb9c6a1c192a90001016cce2, province=40, user_id=2, phone=13688045082, last_time=1457846897, reg_time=1457747459, up_time=1457844047, reg_ip=127.0.0.1, yibao=1, email=, username=zsjr_20145} \r\n";
 $in .= "2.{last_ip=127.0.0.1, logintime=3, block_status=0, paypassword=null, tuijian_userid=1, terminal=0, type=1, up_ip=171.214.213.210, realname=, spreads_key=045082, password=7e100345eb9c6a1c192a90001016cce2, province=40, user_id=2, phone=13688045082, last_time=1457846897, reg_time=1457747459, up_time=1457844047, reg_ip=127.0.0.1, yibao=1, email=, username=zsjr_20145} \r\n";
 $in .= "3.{last_ip=127.0.0.1, logintime=3, block_status=0, paypassword=null, tuijian_userid=1, terminal=0, type=1, up_ip=171.214.213.210, realname=, spreads_key=045082, password=7e100345eb9c6a1c192a90001016cce2, province=40, user_id=2, phone=13688045082, last_time=1457846897, reg_time=1457747459, up_time=1457844047, reg_ip=127.0.0.1, yibao=1, email=, username=zsjr_20145} \r\n";
@@ -45,20 +43,3 @@ echo "\n\n";
 echo "closeing socket..";
 socket_close($socket);
 echo "ok .\n\n";
-
-
-
-
-function modify_buff_size($send_buf_size, $recv_buf_size){
-    $socket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP);
-
-    # Get the size of the socket's send buffer
-    $bufsize = socket_get_option($socket, SOL_SOCKET, SO_SNDBUF);
-    printf("Buffer size [Before]:%d\n", $bufsize);
-
-    $socket.socket_set_option($socket, SOL_SOCKET, TCP_NODELAY, 1);
-    $socket.socket_set_option($socket, SOL_SOCKET, SO_SNDBUF, $send_buf_size);
-    $socket.socket_set_option($socket, SOL_SOCKET, SO_RCVBUF, $recv_buf_size);
-    $bufsize = socket_get_option($socket, SOL_SOCKET, SO_SNDBUF);
-    printf("Buffer size [After]:%d\n", $bufsize);
-}
